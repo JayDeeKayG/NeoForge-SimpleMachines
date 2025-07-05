@@ -42,7 +42,7 @@ public class EnergyCubeEntity extends BlockEntity {
     @Override
     public void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.put("Energy", this.energy.serializeNBT()); // ✅ Proper NBT storage
+        tag.put("Energy", this.energy.serializeNBT());
     }
 
     @Override

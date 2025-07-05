@@ -1,9 +1,11 @@
 package com.jaydeekay.simplemachines.common.Blocks;
 
 import com.jaydeekay.simplemachines.common.Blocks.advanced.EnergyCube;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -18,7 +20,7 @@ public final class BasicBlocks {
 
     public static final DeferredBlock<Block> TEST_ENERGY_CUBE_BLOCK =
         ADVANCED_BLOCKS.register("test_energy_cube", () -> new EnergyCube(BlockBehaviour.Properties.of()
-            .sound(SoundType.METAL)
+            .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.parse("simplemachines:ernergycube")))
         ));
 
     public static final DeferredItem<BlockItem>
