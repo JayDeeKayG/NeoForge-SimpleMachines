@@ -11,10 +11,12 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.jarjar.nio.util.Lazy;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,6 +61,14 @@ public class EnergyCubeEntity extends BlockEntity {
         tag.getCompound("Energy").ifPresent(this.energy::deserializeNBT);
     }
 
+    @SubscribeEvent
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(
+            Capabilities.EnergyStorage.BLOCK,
+            ENERGY_CUBE_ENTITY.get(),
+            (EnergyCubeEntity be, @Nullable Direction side) -> be.getEnergy()
+        );
+    }
 
     @Nullable
     @Override
