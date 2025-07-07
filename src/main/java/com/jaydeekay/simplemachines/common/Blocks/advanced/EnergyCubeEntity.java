@@ -8,19 +8,16 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.jarjar.nio.util.Lazy;
-import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.jaydeekay.simplemachines.SimpleMachines.MODID;
 import static com.jaydeekay.simplemachines.common.Blocks.advanced.AdvancedBlockRegister.ENERGY_CUBE_ENTITY;
 
 public class EnergyCubeEntity extends BlockEntity {
@@ -44,10 +41,6 @@ public class EnergyCubeEntity extends BlockEntity {
         return this.energy;
     }
 
-    public static final BlockCapability<Capabilities.EnergyStorage, Void> ENERGY_HANDLER =
-        BlockCapability.createVoid(
-            ResourceLocation.fromNamespaceAndPath(MODID, "energy_storage"),
-            Capabilities.EnergyStorage.class);
 
     @Override
     public void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
