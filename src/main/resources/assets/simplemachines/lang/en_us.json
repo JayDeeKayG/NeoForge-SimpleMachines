@@ -1,7 +1,7 @@
 {
   "itemGroup.simplemachines": "Simple Machines",
   "block.simplemachines.test_block": "Test Block",
-  "block.simplemachines.test_energy_cube_block": "Test Energy Cube",
-  "item.simplemachines.test_energy_cube_item": "Test Energy Cube",
+  "block.simplemachines.test_energy_cube": "Test Energy Cube",
+  "item.simplemachines.test_energy_cube": "Test Energy Cube",
   "item.simplemachines.test_item": "Test Item"
 }
