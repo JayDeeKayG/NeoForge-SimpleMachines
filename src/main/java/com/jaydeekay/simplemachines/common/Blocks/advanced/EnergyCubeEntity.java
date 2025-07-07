@@ -11,20 +11,22 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.jarjar.nio.util.Lazy;
-import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+//import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.jaydeekay.simplemachines.SimpleMachines.MODID;
 import static com.jaydeekay.simplemachines.common.Blocks.advanced.AdvancedBlockRegister.ENERGY_CUBE_ENTITY;
 
+@EventBusSubscriber(modid = MODID)
 public class EnergyCubeEntity extends BlockEntity {
 
-    final CompoundTag tag = new CompoundTag();
-
-    private BlockCapabilityCache<Capabilities.EnergyStorage, @Nullable Direction> CapabilityCache;
+    // need to use this
+    // private BlockCapabilityCache<Capabilities.EnergyStorage, @Nullable Direction> CapabilityCache;
 
     private final CustomEnergyStorage energy = new CustomEnergyStorage(10000, 100,100,0);
     private final Lazy<CustomEnergyStorage> energyOptional = Lazy.of(() -> energy);
@@ -61,6 +63,15 @@ public class EnergyCubeEntity extends BlockEntity {
             ENERGY_CUBE_ENTITY.get(),
             (EnergyCubeEntity be, @Nullable Direction side) -> be.getEnergy()
         );
+    }
+
+    @Override
+    public void onLoad() {
+    }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
     }
 
     @Nullable
