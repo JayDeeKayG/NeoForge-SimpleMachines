@@ -49,7 +49,7 @@ public  class CustomEnergyStorage extends EnergyStorage {
     }
 
     public void deserializeNBT(CompoundTag nbt) {
-        this.SetEnergy(nbt.getInt("Energy").orElse(0)); // fallback if missing
+        this.SetEnergy(nbt.getInt("Energy").orElse(0));
     }
 
 }

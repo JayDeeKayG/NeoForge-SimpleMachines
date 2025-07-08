@@ -1,5 +1,6 @@
 package com.jaydeekay.simplemachines;
 
+import com.jaydeekay.simplemachines.common.gui.ModMenuTypes;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -44,6 +45,8 @@ public class SimpleMachines {
         ADVANCED_BLOCKS.register(modEventBus);
         BLOCK_ENTITY_TYPES.register(modEventBus);
         CREATIVE_TABS.register(modEventBus);
+
+        ModMenuTypes.register(modEventBus);
 
 
 
