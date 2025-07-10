@@ -1,6 +1,8 @@
 package com.jaydeekay.simplemachines;
 
 import com.jaydeekay.simplemachines.common.gui.ModMenuTypes;
+import com.jaydeekay.simplemachines.common.gui.custom.EnergyCubeScreen;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -84,6 +86,10 @@ public class SimpleMachines {
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        }
+        @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event) {
+            event.register(ModMenuTypes.ENERGY_CUBE_MENU.get(), EnergyCubeScreen::new);
         }
     }
 }
