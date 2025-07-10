@@ -1,8 +1,5 @@
 package com.jaydeekay.simplemachines.common.gui;
 
-//import com.jaydeekay.tutorialmod.TutorialMod;
-//import net.kaupenjoe.tutorialmod.screen.custom.GrowthChamberMenu;
-//import net.kaupenjoe.tutorialmod.screen.custom.PedestalMenu;
 import com.jaydeekay.simplemachines.common.gui.custom.EnergyCubeMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
