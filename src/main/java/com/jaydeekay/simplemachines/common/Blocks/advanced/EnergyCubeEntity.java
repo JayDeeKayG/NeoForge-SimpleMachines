@@ -35,10 +35,15 @@ import static com.jaydeekay.simplemachines.common.Blocks.advanced.AdvancedBlockR
 public class EnergyCubeEntity extends BlockEntity implements MenuProvider {
 
 
-    public final ItemStackHandler inventory = new ItemStackHandler(1) {
+    public final ItemStackHandler inventory = new ItemStackHandler(2) {
         @Override
         protected int getStackLimit(int slot, @NotNull ItemStack stack) {
             return 1;
+        }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return stack.getCapability(Capabilities.EnergyStorage.ITEM, null) != null;
         }
 
         @Override
@@ -71,6 +76,7 @@ public class EnergyCubeEntity extends BlockEntity implements MenuProvider {
 
     public void clearContents() {
         inventory.setStackInSlot(0, ItemStack.EMPTY);
+        inventory.setStackInSlot(1, ItemStack.EMPTY);
     }
 
     public void drops() {
