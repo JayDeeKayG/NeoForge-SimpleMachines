@@ -32,8 +32,8 @@ public class EnergyCubeMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 80, 35));
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 1, 100, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 16, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 1, 144, 35));
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
