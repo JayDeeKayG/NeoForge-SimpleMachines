@@ -21,6 +21,8 @@ public final class BasicBlocks {
     public static final DeferredBlock<Block> TEST_ENERGY_CUBE_BLOCK =
         ADVANCED_BLOCKS.register("test_energy_cube", () -> new EnergyCube(BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.parse("simplemachines:test_energy_cube")))
+            .strength(2.0f)
+            .requiresCorrectToolForDrops()
         ));
 
     public static final DeferredItem<BlockItem>
