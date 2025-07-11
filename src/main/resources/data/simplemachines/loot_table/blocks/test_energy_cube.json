@@ -12,7 +12,20 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "simplemachines:test_energy_cube"
+          "name": "simplemachines:test_energy_cube",
+          "functions": [
+            {
+              "function": "minecraft:copy_custom_data",
+              "source": "block_entity",
+              "ops": [
+                {
+                  "source": "Energy",
+                  "target": "BlockEntityTag.Energy",
+                  "op": "replace"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
