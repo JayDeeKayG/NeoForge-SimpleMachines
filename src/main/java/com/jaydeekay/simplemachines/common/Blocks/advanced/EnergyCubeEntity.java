@@ -17,6 +17,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -89,6 +90,39 @@ public class EnergyCubeEntity extends BlockEntity implements MenuProvider {
         Containers.dropContents(this.level, this.worldPosition, inv);
     }
 
+    public void transferEnergyToItem() {
+        ItemStack stack = inventory.getStackInSlot(1);
+        if (stack.isEmpty()) return;
+
+        var itemEnergy = stack.getCapability(Capabilities.EnergyStorage.ITEM, null);
+        if (itemEnergy == null || !itemEnergy.canReceive()) return;
+
+        int energyToSend = Math.min(energy.getEnergyStored(), 100);
+        int accepted = itemEnergy.receiveEnergy(energyToSend, false);
+
+        if (accepted > 0) {
+            energy.extractEnergy(accepted, false);
+            setChanged();
+        }
+    }
+
+    public void transferEnergyToFromItem() {
+        ItemStack stack = inventory.getStackInSlot(0);
+        if (stack.isEmpty()) return;
+        if (energy.getEnergyStored() > energy.getMaxEnergyStored() - 100) return;
+
+        var itemEnergy = stack.getCapability(Capabilities.EnergyStorage.ITEM, null);
+        if (itemEnergy == null || !itemEnergy.canExtract()) return;
+
+        int energyToSend = Math.min(itemEnergy.getEnergyStored(), 100);
+        int accepted = energy.receiveEnergy(energyToSend, false);
+
+        if (accepted > 0) {
+            itemEnergy.extractEnergy(accepted, false);
+            setChanged();
+        }
+    }
+
     @Override
     public void preRemoveSideEffects(@NotNull BlockPos pos, @NotNull BlockState state) {
         drops();
@@ -140,4 +174,10 @@ public class EnergyCubeEntity extends BlockEntity implements MenuProvider {
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {return ClientboundBlockEntityDataPacket.create(this);}
 
+    public static <T extends BlockEntity> void tick(Level level, @Nullable BlockPos blockPos, @Nullable BlockState blockState, T t) {
+        if (!level.isClientSide && t instanceof EnergyCubeEntity be) {
+            be.transferEnergyToItem();
+            be.transferEnergyToFromItem();
+        }
+    }
 }
